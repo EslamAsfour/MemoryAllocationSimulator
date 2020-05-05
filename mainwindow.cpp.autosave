@@ -101,7 +101,9 @@ void MainWindow::on_pushButton_AddHoleP1_clicked()
 void MainWindow::on_pushButton_To_P2_clicked()
 {
     if(TotalMemSize != 0)
-         ui->init->setCurrentIndex(1);
+    {
+        ui->init->setCurrentIndex(1);
+    }
     QString msg = "Please Atleast Enter the Size of the memory";
     SendMsgError(msg);
 }

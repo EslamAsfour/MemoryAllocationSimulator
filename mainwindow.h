@@ -16,9 +16,13 @@ public:
     ~MainWindow();
     bool CheckIsNumber(QString str);
     void SendMsgError(QString msg);
-    void SendMsgDone(QString msg);
+    void SendMsgInfo(QString msg);
 private slots:
     void on_pushButton_SubmitSize_clicked();
+
+    void on_pushButton_AddHoleP1_clicked();
+
+    void on_pushButton_To_P2_clicked();
 
 private:
     Ui::MainWindow *ui;
