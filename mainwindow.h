@@ -14,8 +14,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    bool CheckIsNumber(QString str);
+    void SendMsgError(QString msg);
+    void SendMsgDone(QString msg);
+private slots:
+    void on_pushButton_SubmitSize_clicked();
 
 private:
     Ui::MainWindow *ui;
+    int TotalMemSize;
 };
 #endif // MAINWINDOW_H
