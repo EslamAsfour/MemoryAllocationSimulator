@@ -101,7 +101,48 @@ void MainWindow::on_pushButton_AddHoleP1_clicked()
 void MainWindow::on_pushButton_To_P2_clicked()
 {
     if(TotalMemSize != 0)
-         ui->init->setCurrentIndex(1);
+    {
+        ui->init->setCurrentIndex(1);
+    }
     QString msg = "Please Atleast Enter the Size of the memory";
     SendMsgError(msg);
+}
+
+
+void MainWindow::Display()
+{
+    auto wid = new QWidget();
+    auto box = new QHBoxLayout(wid);
+    box->setSpacing(0);
+    box->setMargin(0);
+
+
+    // Add Button and label
+    auto item = new QPushButton("GAP");
+    item->setStyleSheet("color : blue; height : 35px; font-size : 12px; font : bold  ");
+    auto timeDiff = new QLabel(QString::number(10));
+    timeDiff->setSizePolicy(QSizePolicy ::Fixed,QSizePolicy ::Fixed);
+    box->addWidget(timeDiff);
+    box->addWidget(item);
+    box->setAlignment(Qt::AlignTop);
+
+
+    // Widget to set Width and Height
+
+
+
+    wid->setLayout(box);
+
+
+   ui->MemoryWid->findChild<QScrollArea*>("ButtonsBar")->addScrollBarWidget(wid,0);
+
+   ui->MemoryWid->findChild<QScrollArea*>("ButtonsBar")->setWidgetResizable(true);
+
+
+}
+
+
+void MainWindow::on_NextButtonP2_clicked()
+{
+    Display();
 }
