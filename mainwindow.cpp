@@ -113,30 +113,23 @@ void MainWindow::Display()
 {
     auto wid = new QWidget();
     auto box = new QHBoxLayout(wid);
-    box->setSpacing(0);
     box->setMargin(0);
-
+    wid->setContentsMargins(0,0,0,0);
 
     // Add Button and label
-    auto item = new QPushButton("GAP");
-    item->setStyleSheet("color : blue; height : 35px; font-size : 12px; font : bold  ");
-    auto timeDiff = new QLabel(QString::number(10));
-    timeDiff->setSizePolicy(QSizePolicy ::Fixed,QSizePolicy ::Fixed);
-    box->addWidget(timeDiff);
-    box->addWidget(item);
+    auto btn = new QPushButton("GAP");
+    btn->setStyleSheet("color : blue; height : 60px; width : 170px; font-size : 12px; font : bold  ");
+    auto MemAddr = new QLabel(QString::number(100022000));
+    MemAddr->setStyleSheet("qproperty-alignment: 'AlignTop';");
+    box->addWidget(MemAddr);
+    box->addWidget(btn);
     box->setAlignment(Qt::AlignTop);
 
 
     // Widget to set Width and Height
 
 
-
-    wid->setLayout(box);
-
-
-   ui->MemoryWid->findChild<QScrollArea*>("ButtonsBar")->addScrollBarWidget(wid,0);
-
-   ui->MemoryWid->findChild<QScrollArea*>("ButtonsBar")->setWidgetResizable(true);
+   ui->ButtonsBar_2->findChild<QVBoxLayout*>("VertMemo")->addWidget(wid,0);
 
 
 }
