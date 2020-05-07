@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1199</width>
+    <width>1226</width>
     <height>711</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>0</x>
       <y>598</y>
-      <width>1201</width>
+      <width>1231</width>
       <height>191</height>
      </rect>
     </property>
@@ -41,7 +41,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1201</width>
+      <width>1231</width>
       <height>91</height>
      </rect>
     </property>
@@ -84,7 +84,7 @@ border: 2px solid white;
      <rect>
       <x>10</x>
       <y>90</y>
-      <width>1211</width>
+      <width>1221</width>
       <height>511</height>
      </rect>
     </property>
@@ -946,9 +946,15 @@ border: 2px solid white;
        <rect>
         <x>690</x>
         <y>0</y>
-        <width>501</width>
+        <width>521</width>
         <height>511</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="horizontalScrollMode">
+       <enum>QAbstractItemView::ScrollPerPixel</enum>
       </property>
       <column>
        <property name="text">

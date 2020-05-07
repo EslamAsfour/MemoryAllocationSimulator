@@ -19,6 +19,7 @@ public:
     void SendMsgInfo(QString msg);
 
     void Display();
+    void DisplayTable();
 private slots:
     void on_pushButton_SubmitSize_clicked();
 

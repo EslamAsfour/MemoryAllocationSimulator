@@ -134,8 +134,25 @@ void MainWindow::Display()
 
 }
 
+void MainWindow::DisplayTable()
+{
+    QTableWidgetItem *Proc= new QTableWidgetItem ("Hosam");
+    QTableWidgetItem *Seg= new QTableWidgetItem ("Hosam");
+    QTableWidgetItem *Add= new QTableWidgetItem ("Hosam");
+    QTableWidgetItem *Size= new QTableWidgetItem ("Hosam");
+
+    ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+    int row = ui->tableWidget->rowCount()-1;
+    ui->tableWidget->setItem(row,0,Proc);
+    ui->tableWidget->setItem(row,1,Seg);
+    ui->tableWidget->setItem(row,2,Add);
+    ui->tableWidget->setItem(row,3,Size);
+
+}
+
 
 void MainWindow::on_NextButtonP2_clicked()
 {
     Display();
+    DisplayTable();
 }
