@@ -3,4 +3,10 @@
         <file>E:/Qt Projects/OS_Scheduler/sh_footer.png</file>
     </qresource>
     <qresource prefix="/new/prefix2"/>
+    <qresource prefix="/img2">
+        <file>white-sea-chevrolet-small-block-engine-white-house-organization-industry-dashed.jpg</file>
+        <file>96288549_534604717192287_3536539649927282688_n.png</file>
+        <file>Gray.jpg</file>
+        <file>Green.png</file>
+    </qresource>
 </RCC>

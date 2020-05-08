@@ -118,7 +118,7 @@ border: 2px solid white;
         <number>0</number>
        </property>
        <item>
-        <widget class="QWidget" name="" native="true">
+        <widget class="QWidget" name="widget" native="true">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -417,11 +417,11 @@ AlignCenter;</string>
      </widget>
     </widget>
     <widget class="QWidget" name="page_2">
-     <widget class="QStackedWidget" name="Input_Stacked_Wid">
+     <widget class="QStackedWidget" name="Process_Input_Stacked_Wid">
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>10</y>
         <width>411</width>
         <height>261</height>
        </rect>
@@ -430,7 +430,7 @@ AlignCenter;</string>
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_3">
        <widget class="QWidget" name="widget" native="true">
@@ -482,7 +482,7 @@ border: 2px solid white;
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit">
+             <widget class="QLineEdit" name="PName">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -536,7 +536,7 @@ border: 2px solid white;
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_2">
+             <widget class="QLineEdit" name="NumSeg">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -570,7 +570,7 @@ border: 2px solid white;
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
-             <widget class="QRadioButton" name="radioButton">
+             <widget class="QRadioButton" name="BestRadioBtn">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -588,7 +588,7 @@ border: 2px solid white;
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton_2">
+             <widget class="QRadioButton" name="FirstRadioBtn">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -711,7 +711,7 @@ border: 2px solid white;
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_3">
+            <widget class="QLineEdit" name="SegName_LineEdit">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -752,7 +752,7 @@ border: 2px solid white;
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_4">
+            <widget class="QLineEdit" name="SegSize_LineEdit">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -764,7 +764,7 @@ border: 2px solid white;
           </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="Seg_Submit">
            <property name="font">
             <font>
              <pointsize>11</pointsize>
@@ -811,7 +811,7 @@ border: 2px solid white;
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
-             <widget class="QLineEdit" name="lineEdit_5">
+             <widget class="QLineEdit" name="ShowCount">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -835,10 +835,16 @@ border: 2px solid white;
 </string>
               </property>
               <property name="text">
-               <string>4</string>
+               <string>0</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -852,9 +858,9 @@ border: 2px solid white;
      <widget class="QWidget" name="MemoryWid" native="true">
       <property name="geometry">
        <rect>
-        <x>410</x>
+        <x>420</x>
         <y>0</y>
-        <width>271</width>
+        <width>261</width>
         <height>511</height>
        </rect>
       </property>
@@ -890,7 +896,7 @@ border: 2px solid white;
         <rect>
          <x>0</x>
          <y>30</y>
-         <width>270</width>
+         <width>261</width>
          <height>480</height>
         </rect>
        </property>
@@ -905,7 +911,7 @@ border: 2px solid white;
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>268</width>
+          <width>259</width>
           <height>478</height>
          </rect>
         </property>

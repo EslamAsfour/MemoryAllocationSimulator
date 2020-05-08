@@ -2,10 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "External_Functions.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+
 
 class MainWindow : public QMainWindow
 {
@@ -29,8 +31,28 @@ private slots:
 
     void on_NextButtonP2_clicked();
 
+    void on_BestRadioBtn_clicked(bool checked);
+
+    void on_BestRadioBtn_clicked();
+
+    void on_FirstRadioBtn_clicked();
+
+    void on_Seg_Submit_clicked();
+
 private:
     Ui::MainWindow *ui;
     int TotalMemSize;
+    QVector<QString> ProcessesName;
+
+    int count;
+    QString Type;
+    QVector<QString> SegName;
+    QVector<int> SegSize;
+
+    //
+    QVector<segment> Memory;
+    QVector<int> InitHoleAddr;
+    QVector<int>InitHoleSize;
+
 };
 #endif // MAINWINDOW_H
