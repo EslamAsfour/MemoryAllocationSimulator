@@ -1,7 +1,7 @@
 // ConsoleApplication23.cpp : Defines the entry point for the console application.
 //
 #include "External_Functions.h"
-
+#include <QDebug>
 
 
 
@@ -64,6 +64,56 @@ void add_holes(QVector<segment>&v, QVector<int> adress, QVector<int> size, int t
 
     }
 
+}
+
+int bestIndex;
+bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>size, QString parent) {
+    QVector<segment> check = memory;
+    bool place_is_found = true;
+    for (int i = 0; i<names.size(); i++) {
+        int bestIndex = -1;
+        for (int j = 0; j <memory.size(); j++) {
+            if (check[j].hole == true) {
+                if (check[j].size >= size[i])
+                {
+
+                    if (bestIndex == -1)
+                        bestIndex = j;
+                    else if (check[bestIndex].size > check[j].size)
+                        bestIndex = j;
+                }
+            }
+        }
+        if (bestIndex == -1) {
+            place_is_found = false;
+            break;
+        }
+        if (check[bestIndex].size == size[i]) {
+            check[bestIndex].name = names[i];
+            check[bestIndex].hole = false;
+            check[bestIndex].parent = parent;
+            place_is_found = true;
+        }
+        else if (check[bestIndex].size > size[i]) {
+            int it = bestIndex + 1;
+            check[bestIndex].size -= size[i];
+
+            check.insert(check.begin() + it,segment (names[i], parent, (check[bestIndex].address + check[bestIndex].size), size[i]));
+
+            place_is_found = true;
+        }
+        else {
+            place_is_found = false;
+        }
+    }
+
+    if (place_is_found == false) {
+        return false;
+    }
+    else if (place_is_found == true) {
+        memory = check;
+    }
+    return true;
 }
 
 

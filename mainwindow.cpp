@@ -121,6 +121,7 @@ void MainWindow::Display()
     {
         auto wid = new QWidget();
         auto box = new QHBoxLayout(wid);
+        ToBeDeleted.push_back(wid);
         box->setMargin(0);
         wid->setContentsMargins(0,0,0,0);
         int height = (Memory[i].size * 450)/TotalMemSize;
@@ -156,6 +157,15 @@ void MainWindow::Display()
 
     }
 }
+//Function to clear showed memory
+void MainWindow::RemoveAllDisplayed()
+{
+    foreach(auto x, ToBeDeleted)
+    {
+        delete x;
+    }
+    ToBeDeleted.resize(0);
+}
 
 void MainWindow::DisplayTable()
 {
@@ -179,6 +189,8 @@ void MainWindow::on_NextButtonP2_clicked()
 {
     auto PName = ui->page_3->findChild<QLineEdit*>("PName")->text();
     auto NumSeg = ui->page_3->findChild<QLineEdit*>("NumSeg")->text();
+    ui->page_3->findChild<QLineEdit*>("PName")->setText("");
+    ui->page_3->findChild<QLineEdit*>("NumSeg")->setText("");
     //Empty Input
     if(PName == "" || NumSeg == ""  )
     {
@@ -230,22 +242,22 @@ void MainWindow::on_FirstRadioBtn_clicked()
 //Check Seg name and size
 void MainWindow::on_Seg_Submit_clicked()
 {
-    auto SegName = ui->page_4->findChild<QLineEdit*>("SegName_LineEdit")->text();
-    auto SegSize = ui->page_4->findChild<QLineEdit*>("SegSize_LineEdit")->text();
-
+    auto SegNameLine = ui->page_4->findChild<QLineEdit*>("SegName_LineEdit")->text();
+    auto SegSizeLine = ui->page_4->findChild<QLineEdit*>("SegSize_LineEdit")->text();
+    ui->page_4->findChild<QLineEdit*>("SegSize_LineEdit")->setText("");
+    ui->page_4->findChild<QLineEdit*>("SegName_LineEdit")->setText("");
     // Submited All the segment so we return to Process page
 
     // Empty Inputs
-    if(SegName == "" || SegSize == "" )
+    if(SegNameLine == "" || SegSizeLine == "" )
     {
         QString msg = "Please Fill All Input Fields";
         SendMsgError(msg);
         return ;               // To Terminate the Function
     }
-     qDebug() << SegSize;
-      qDebug() << CheckIsNumber(SegSize);
+
     //SegSize is not a number
-    if(!CheckIsNumber(SegSize))
+    if(!CheckIsNumber(SegSizeLine))
     {
         QString msg = "Wronge input for Segment Size";
         ui->page_4->findChild<QLineEdit*>("SegSize_LineEdit")->setText("");
@@ -254,8 +266,8 @@ void MainWindow::on_Seg_Submit_clicked()
     }
 
     count--;
-    SegName.push_back(SegName);
-    SegSize.push_back(SegSize.toInt());
+    SegName.push_back(SegNameLine);
+    SegSize.push_back(SegSizeLine.toInt());
 
 
     ui->page_4->findChild<QLineEdit*>("ShowCount")->setText(QString::number(count));
@@ -263,5 +275,24 @@ void MainWindow::on_Seg_Submit_clicked()
     if(count == 0)
     {
         ui->page_2->findChild<QStackedWidget*>("Process_Input_Stacked_Wid")->setCurrentIndex(0);
+        if(Type == "Best-Fit")
+        {
+            // If we didnt fine a place
+            if(!best_fit_alloc(Memory,SegName,SegSize,ProcessesName.back()))
+            {
+                QString msg = "No Enought Space for all segments";
+                SendMsgError(msg);
+            }
+            SegName.resize(0);
+            SegSize.resize(0);
+        }
+        else if (Type == "First-Fit")
+        {
+            // -------------------- Add Sara Function -----------------------------
+
+            //----------------------------------------------------------------------
+        }
+        RemoveAllDisplayed();
+        Display();
     }
 }

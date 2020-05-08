@@ -21,6 +21,7 @@ public:
     void SendMsgInfo(QString msg);
 
     void Display();
+    void RemoveAllDisplayed();
     void DisplayTable();
 private slots:
     void on_pushButton_SubmitSize_clicked();
@@ -54,5 +55,7 @@ private:
     QVector<int> InitHoleAddr;
     QVector<int>InitHoleSize;
 
+    //
+    QVector<QWidget*>ToBeDeleted;
 };
 #endif // MAINWINDOW_H
