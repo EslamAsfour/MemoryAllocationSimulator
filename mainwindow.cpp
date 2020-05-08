@@ -109,6 +109,7 @@ void MainWindow::on_pushButton_To_P2_clicked()
         add_holes(Memory,InitHoleAddr,InitHoleSize,TotalMemSize);
         Display();
         ui->init->setCurrentIndex(1);
+        return ;
     }
     QString msg = "Please Atleast Enter the Size of the memory";
     SendMsgError(msg);
@@ -169,17 +170,38 @@ void MainWindow::RemoveAllDisplayed()
 
 void MainWindow::DisplayTable()
 {
-    QTableWidgetItem *Proc= new QTableWidgetItem ("Hosam");
-    QTableWidgetItem *Seg= new QTableWidgetItem ("Hosam");
-    QTableWidgetItem *Add= new QTableWidgetItem ("Hosam");
-    QTableWidgetItem *Size= new QTableWidgetItem ("Hosam");
+    QVector<segment> temp;
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(0);
+    for(int i=0;i<ProcessesName.length();i++)
+    {
+        temp = seg_table(Memory,ProcessesName[i]);
 
-    ui->tableWidget->insertRow(ui->tableWidget->rowCount());
-    int row = ui->tableWidget->rowCount()-1;
-    ui->tableWidget->setItem(row,0,Proc);
-    ui->tableWidget->setItem(row,1,Seg);
-    ui->tableWidget->setItem(row,2,Add);
-    ui->tableWidget->setItem(row,3,Size);
+        for(int j =0; j < temp.length();j++)
+        {
+            QTableWidgetItem *Proc;
+            if(j == 0 )
+            {
+                Proc= new QTableWidgetItem (ProcessesName[i]);
+            }
+            else
+            {
+                Proc= new QTableWidgetItem ("");
+            }
+            QTableWidgetItem *Seg= new QTableWidgetItem (temp[j].name);
+            QTableWidgetItem *Add= new QTableWidgetItem (QString::number(temp[j].address));
+            QTableWidgetItem *Size= new QTableWidgetItem (QString::number(temp[j].size));
+
+            ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+            int row = ui->tableWidget->rowCount()-1;
+            ui->tableWidget->setItem(row,0,Proc);
+            ui->tableWidget->setItem(row,1,Seg);
+            ui->tableWidget->setItem(row,2,Add);
+            ui->tableWidget->setItem(row,3,Size);
+        }
+    }
+
+
 
 }
 
@@ -281,6 +303,7 @@ void MainWindow::on_Seg_Submit_clicked()
             if(!best_fit_alloc(Memory,SegName,SegSize,ProcessesName.back()))
             {
                 QString msg = "No Enought Space for all segments";
+                ProcessesName.pop_back();
                 SendMsgError(msg);
             }
             SegName.resize(0);
@@ -290,9 +313,34 @@ void MainWindow::on_Seg_Submit_clicked()
         {
             // -------------------- Add Sara Function -----------------------------
 
+                    if(!first_fit_alloc(Memory,SegName,SegSize,ProcessesName.back()))
+                    {
+                        QString msg = "No Enought Space for all segments";
+                        ProcessesName.pop_back();
+                        SendMsgError(msg);
+                    }
+                    SegName.resize(0);
+                    SegSize.resize(0);
             //----------------------------------------------------------------------
         }
         RemoveAllDisplayed();
         Display();
+        DisplayTable();
     }
+}
+
+void MainWindow::on_DeAlloc_Btn_clicked()
+{
+
+   auto DeAllocProcess = ui->widget_2->findChild<QLineEdit*>("DeAlloc_LineEd")->text();
+   if(DeAllocProcess == "")
+   {
+       QString msg = "Please Enter A Process to be DeAllocated";
+       SendMsgError(msg);
+       return;
+   }
+   // ------------------ Addd Code Jimmyyyyyyyyyyyy ---------------------
+
+   //--------------------------------------------------------------------
+
 }

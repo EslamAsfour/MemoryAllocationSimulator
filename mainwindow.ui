@@ -1058,7 +1058,7 @@ border: 2px solid white;
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit">
+            <widget class="QLineEdit" name="DeAlloc_LineEd">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -1070,7 +1070,7 @@ border: 2px solid white;
           </layout>
          </item>
          <item alignment="Qt::AlignHCenter">
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="DeAlloc_Btn">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>0</horstretch>

@@ -2,7 +2,7 @@
 //
 #include "External_Functions.h"
 #include <QDebug>
-
+#include<QtAlgorithms>
 
 
 void add_holes(QVector<segment>&v, QVector<int> adress, QVector<int> size, int total) {
@@ -115,5 +115,74 @@ bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>
     }
     return true;
 }
+
+
+bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>size, QString parent) {
+    QVector<segment> check_1 = memory;
+    bool place_is_found_1 = true;
+    for (int i = 0; i <names.size(); i++) {
+        for (int j = 0; j <memory.size(); j++) {
+            if (check_1[j].hole == true) {
+                if (check_1[j].size == size[i]) {
+                    check_1[j].name = names[i];
+                    check_1[j].hole = false;
+                    check_1[j].parent = parent;
+                    place_is_found_1 = true;
+                    break;
+
+                }
+                else if (check_1[j].size > size[i]) {
+                    int it_1 = j + 1;
+                    check_1[j].size -= size[i];
+
+                    check_1.insert(check_1.begin() + it_1,segment (names[i], parent, (check_1[j].address + check_1[j].size), size[i]) );
+
+                    break;
+                }
+                else {
+                    place_is_found_1 = false;
+                }
+
+            }
+        }
+    }
+    if (place_is_found_1 == false) {
+        return false;
+    }
+    else if (place_is_found_1 == true) {
+        memory = check_1;
+        return true;
+    }
+}
+
+
+QVector<segment> seg_table(QVector<segment>&v, QString proc) {
+
+    /*function that takes a process name then find all the segments for that process and add them to a vector of segments and return that vector
+    the memory vector is the first parameter*/
+
+    QVector<segment> seg;
+
+    copy_if(v.begin(), v.end(), std::back_inserter(seg), [proc]( const segment &s)
+    {
+            return s.parent == proc;
+
+    });
+
+
+    return seg;
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 

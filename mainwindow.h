@@ -40,6 +40,8 @@ private slots:
 
     void on_Seg_Submit_clicked();
 
+    void on_DeAlloc_Btn_clicked();
+
 private:
     Ui::MainWindow *ui;
     int TotalMemSize;
