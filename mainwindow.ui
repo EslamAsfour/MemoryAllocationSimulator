@@ -30,7 +30,7 @@
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image : url(:/new/prefix1/E:/Qt Projects/OS_Scheduler/sh_footer.png);
+     <string notr="true">background-image : url(:/img2/sh_footer.png);
  background-position: top ;
 
 </string>
