@@ -333,14 +333,37 @@ void MainWindow::on_DeAlloc_Btn_clicked()
 {
 
    auto DeAllocProcess = ui->widget_2->findChild<QLineEdit*>("DeAlloc_LineEd")->text();
+   ui->widget_2->findChild<QLineEdit*>("DeAlloc_LineEd")->setText("");
    if(DeAllocProcess == "")
    {
        QString msg = "Please Enter A Process to be DeAllocated";
        SendMsgError(msg);
        return;
    }
-   // ------------------ Addd Code Jimmyyyyyyyyyyyy ---------------------
 
+   // ------------------ Addd Code Jimmyyyyyyyyyyyy ---------------------
+    bool flag = false;
+    for(int i = 0 ; i < ProcessesName.length() ; i++)
+    {
+        if(DeAllocProcess == ProcessesName[i])
+           {
+             flag = true;
+             ProcessesName.erase (ProcessesName.begin()+i);
+           }
+    }
+    if(flag == true)
+    {
+        de_alloc(Memory,DeAllocProcess);
+        RemoveAllDisplayed();
+        Display();
+        DisplayTable();
+
+    }else
+    {
+        QString msg = "Couldn't find the entered process please try again";
+        SendMsgError(msg);
+        return;
+    }
    //--------------------------------------------------------------------
 
 }

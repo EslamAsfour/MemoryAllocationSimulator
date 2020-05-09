@@ -70,10 +70,13 @@ int bestIndex;
 bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>size, QString parent) {
     QVector<segment> check = memory;
     bool place_is_found = true;
-    for (int i = 0; i<names.size(); i++) {
+    for (int i = 0; i<names.size(); i++)
+    {
         int bestIndex = -1;
-        for (int j = 0; j <memory.size(); j++) {
-            if (check[j].hole == true) {
+        for (int j = 0; j <memory.size(); j++)
+        {
+            if (check[j].hole == true)
+            {
                 if (check[j].size >= size[i])
                 {
 
@@ -86,6 +89,7 @@ bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>
         }
         if (bestIndex == -1) {
             place_is_found = false;
+            return false;
             break;
         }
         if (check[bestIndex].size == size[i]) {
@@ -94,7 +98,8 @@ bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>
             check[bestIndex].parent = parent;
             place_is_found = true;
         }
-        else if (check[bestIndex].size > size[i]) {
+        else if (check[bestIndex].size > size[i])
+        {
             int it = bestIndex + 1;
             check[bestIndex].size -= size[i];
 
@@ -102,15 +107,10 @@ bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>
 
             place_is_found = true;
         }
-        else {
-            place_is_found = false;
-        }
     }
 
-    if (place_is_found == false) {
-        return false;
-    }
-    else if (place_is_found == true) {
+
+    if (place_is_found == true) {
         memory = check;
     }
     return true;
@@ -119,10 +119,13 @@ bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>
 
 bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>size, QString parent) {
     QVector<segment> check_1 = memory;
-    bool place_is_found_1 = true;
-    for (int i = 0; i <names.size(); i++) {
-        for (int j = 0; j <memory.size(); j++) {
-            if (check_1[j].hole == true) {
+    bool place_is_found_1 = false;
+    for (int i = 0; i <names.size(); i++)
+    {
+        for (int j = 0; j <memory.size(); j++)
+        {
+            if (check_1[j].hole == true)
+            {
                 if (check_1[j].size == size[i]) {
                     check_1[j].name = names[i];
                     check_1[j].hole = false;
@@ -134,25 +137,23 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
                 else if (check_1[j].size > size[i]) {
                     int it_1 = j + 1;
                     check_1[j].size -= size[i];
-
+                    place_is_found_1 = true;
                     check_1.insert(check_1.begin() + it_1,segment (names[i], parent, (check_1[j].address + check_1[j].size), size[i]) );
 
                     break;
                 }
-                else {
-                    place_is_found_1 = false;
-                }
 
             }
         }
+        if (place_is_found_1 == false) {
+            return false;
+        }
     }
-    if (place_is_found_1 == false) {
-        return false;
-    }
-    else if (place_is_found_1 == true) {
+
+
         memory = check_1;
         return true;
-    }
+
 }
 
 
@@ -172,6 +173,49 @@ QVector<segment> seg_table(QVector<segment>&v, QString proc) {
 
     return seg;
 
+}
+
+void de_alloc(QVector<segment>&v, QString proc) {
+    /*function that takes a process name then find all the segments for that process and remove them from the memory
+    then check if there is a hole before or after it then it should increase the hole size
+    if not then it add a new hole to the memory vector
+    the memory vector is the first parameter*/
+    for (int i = 0; i < v.size(); i++) {
+        if (v[i].hole)
+            continue;
+        if (v[i].parent == proc) {
+            if (v[i - 1].hole) {
+                v[i - 1].size += v[i].size;
+                v.erase(v.begin() + i);
+                i--;
+            }
+            else if (v[i + 1].hole) {
+                v[i + 1].size += v[i].size;
+                v[i + 1].address = v[i].address;
+                v.erase(v.begin() + i);
+                i--;
+            }
+            else {
+                v[i].hole = true;
+                v[i].parent = "";
+                v[i].name = "";
+            }
+
+        }
+    }
+    for (int i = 0; i < v.size(); i++) {
+        if (!v[i].hole)
+            continue;
+        if (v[i].hole) {
+            if (i + 1 != v.size()) {
+                if (v[i + 1].hole) {
+                    v[i].size += v[i + 1].size;
+                    v.erase(v.begin() + i + 1);
+                    i--;
+                }
+            }
+        }
+    }
 }
 
 
