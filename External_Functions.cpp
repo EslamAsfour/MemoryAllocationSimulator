@@ -73,7 +73,7 @@ bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>
     for (int i = 0; i<names.size(); i++)
     {
         int bestIndex = -1;
-        for (int j = 0; j <memory.size(); j++)
+        for (int j = 0; j <check.size(); j++)
         {
             if (check[j].hole == true)
             {
@@ -81,9 +81,11 @@ bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>
                 {
 
                     if (bestIndex == -1)
-                        bestIndex = j;
+                    {bestIndex = j;}
+
                     else if (check[bestIndex].size > check[j].size)
                         bestIndex = j;
+                    qDebug() << bestIndex;
                 }
             }
         }
@@ -122,7 +124,7 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
     bool place_is_found_1 = false;
     for (int i = 0; i <names.size(); i++)
     {
-        for (int j = 0; j <memory.size(); j++)
+        for (int j = 0; j <check_1.size(); j++)
         {
             if (check_1[j].hole == true)
             {

@@ -348,7 +348,10 @@ void MainWindow::on_DeAlloc_Btn_clicked()
         if(DeAllocProcess == ProcessesName[i])
            {
              flag = true;
+             qDebug()<< ProcessesName;
              ProcessesName.erase (ProcessesName.begin()+i);
+             qDebug()<< ProcessesName;
+             break;
            }
     }
     if(flag == true)
