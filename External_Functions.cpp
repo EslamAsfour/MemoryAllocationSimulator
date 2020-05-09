@@ -186,6 +186,37 @@ void de_alloc(QVector<segment>&v, QString proc) {
         if (v[i].hole)
             continue;
         if (v[i].parent == proc) {
+            if(i==0){
+                if (v[i + 1].hole) {
+                    v[i + 1].size += v[i].size;
+                    v[i + 1].address = v[i].address;
+                    v.erase(v.begin() + i);
+                    i--;
+                    continue;
+                }
+                else {
+                    v[i].hole = true;
+                    v[i].parent = "";
+                    v[i].name = "";
+                    continue;
+                }
+            }
+            if (i+1 >= v.size()) {
+                if (v[i - 1].hole) {
+                    v[i - 1].size += v[i].size;
+                    v.erase(v.begin() + i);
+                    i--;
+                    continue;
+                }
+                else {
+                    v[i].hole = true;
+                    v[i].parent = "";
+                    v[i].name = "";
+                    continue;
+                }
+            }
+
+
             if (v[i - 1].hole) {
                 v[i - 1].size += v[i].size;
                 v.erase(v.begin() + i);
@@ -203,13 +234,14 @@ void de_alloc(QVector<segment>&v, QString proc) {
                 v[i].name = "";
             }
 
+
         }
     }
     for (int i = 0; i < v.size(); i++) {
         if (!v[i].hole)
             continue;
         if (v[i].hole) {
-            if (i + 1 != v.size()) {
+            if (i + 1 < v.size()) {
                 if (v[i + 1].hole) {
                     v[i].size += v[i + 1].size;
                     v.erase(v.begin() + i + 1);
@@ -219,7 +251,6 @@ void de_alloc(QVector<segment>&v, QString proc) {
         }
     }
 }
-
 
 
 

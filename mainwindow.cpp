@@ -220,7 +220,7 @@ void MainWindow::on_NextButtonP2_clicked()
         SendMsgError(msg);
         return ;               // To Terminate the Function
     }
-    if(!CheckIsNumber(NumSeg))
+    if(!CheckIsNumber(NumSeg) || NumSeg.toInt() == 0)
     {
          QString msg = "Wronge input for Number Of Segments";
          ui->page_3->findChild<QLineEdit*>("NumSeg")->setText("");
@@ -233,8 +233,19 @@ void MainWindow::on_NextButtonP2_clicked()
          SendMsgError(msg);
          return ;
     }
+    bool flag1 = true;
+    for(int i=0 ; i< ProcessesName.size() ;i++ )
+    {
+        if(ProcessesName[i] == PName)
+            flag1 = false;
 
-    ProcessesName.push_back(PName);
+    }
+
+    if(flag1 == true)
+    {
+        ProcessesName.push_back(PName);
+    }
+
     count = NumSeg.toInt();
     ui->page_4->findChild<QLineEdit*>("ShowCount")->setText(QString::number(count));
     ui->page_2->findChild<QStackedWidget*>("Process_Input_Stacked_Wid")->setCurrentIndex(1);
