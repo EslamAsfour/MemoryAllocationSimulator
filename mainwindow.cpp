@@ -354,14 +354,18 @@ void MainWindow::on_DeAlloc_Btn_clicked()
 
    // ------------------ Addd Code Jimmyyyyyyyyyyyy ---------------------
     bool flag = false;
-    for(int i = 0 ; i < ProcessesName.length() ; i++)
+    for(int i = 0 ; i < Memory.length() ; i++)
     {
-        if(DeAllocProcess == ProcessesName[i])
+        if(DeAllocProcess == Memory[i].parent)
            {
              flag = true;
-             qDebug()<< ProcessesName;
-             ProcessesName.erase (ProcessesName.begin()+i);
-             qDebug()<< ProcessesName;
+             for(int j = 0 ; j < ProcessesName.length() ; j++)
+             {
+                 if(DeAllocProcess == ProcessesName[j])
+                 {
+                        ProcessesName.erase (ProcessesName.begin()+j);
+                 }
+             }
              break;
            }
     }
