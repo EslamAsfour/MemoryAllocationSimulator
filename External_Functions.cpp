@@ -55,9 +55,9 @@ void add_holes(QVector<segment>&v, QVector<int> adress, QVector<int> size, int t
     {
         //collecting the name and its repeating number
         str=chr;
-        str="predata"+str;
+        str="Predata"+str;
         //adding first data and first hole
-        v.push_back(segment("segment0", str , 0, adress[0]));
+        v.push_back(segment("Segment0", str , 0, adress[0]));
         v.push_back(segment(adress[0], size[0]));
         chr=chr+1;
         //for loop to add inner data and holes
@@ -175,7 +175,6 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
                     check_1[j].parent = parent;
                     place_is_found_1 = true;
                     break;
-
                 }
                 else if (check_1[j].size > size[i]) {
                     int it_1 = j + 1;
@@ -184,20 +183,21 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
                     check_1[j].name = names[i];
                     check_1[j].hole = false;
                     check_1[j].parent = parent;
-
                     check_1.insert(check_1.begin()+it_1, segment ((check_1[j].address +size[i]),new_size));
                     place_is_found_1 = true;
                     break;
                 }
-
+                else
+                {
+                    place_is_found_1 = false;
+                    break;
+                }
             }
         }
         if (place_is_found_1 == false) {
             return false;
         }
     }
-
-
     memory = check_1;
     return true;
 
