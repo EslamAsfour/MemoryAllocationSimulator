@@ -63,7 +63,7 @@ void add_holes(QVector<segment>&v, QVector<int> adress, QVector<int> size, int t
         //for loop to add inner data and holes
         for(int i=1; i<holes_no;i++){
             str=chr;
-            str="predata"+str;
+            str="Predata"+str;
             v.push_back(segment("segment0", str,adress[i-1]+size[i-1] , adress[i]-adress[i-1]-size[i-1]));
             chr=chr+1;
             v.push_back(segment(adress[i], size[i]));
