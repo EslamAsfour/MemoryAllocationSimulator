@@ -64,7 +64,7 @@ border: 2px solid white;
      <enum>QFrame::NoFrame</enum>
     </property>
     <property name="text">
-     <string>TEAM 9</string>
+     <string>TEAM 29</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
